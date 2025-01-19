@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  @apply scrollbar scrollbar-track-[#2E2E2E] scrollbar-thumb-[#5A5A5A] ;
+}
+html {
+  scroll-behavior: smooth;
+}
