@@ -2,6 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react"
+import {useRouter} from "next/navigation"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +28,7 @@ interface AppbarProps{
   dashboard?:string
 }
 export function Appbar({logo,user,onSignIn,onSignOut,dashboard}:AppbarProps){
-
+  const Router = useRouter()
   return (
     <AppbarReveal>
       <div className="container mx-auto flex justify-between items-center pt-6">
@@ -35,7 +36,9 @@ export function Appbar({logo,user,onSignIn,onSignOut,dashboard}:AppbarProps){
           <div>
             {logo}
           </div>
-          <div className="text-green-400 font-bold text-2xl pl-2" >Graph Hive</div>
+          <div className="text-green-400 font-bold text-2xl pl-2 hover:cursor-pointer" onClick={()=>{Router.push('/')}}>
+            Graph Hive
+          </div>
         </div>
         {dashboard?(
           <div className="flex mt-4 mr-14">

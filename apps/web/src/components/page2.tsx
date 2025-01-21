@@ -1,8 +1,17 @@
+'use client'
 import { FeatureCard } from "@repo/ui";
 import CardReveal from "../../../../packages/ui/src/components/cardReveal";
 import Image from "next/image"
+import { useRouter } from "next/navigation";
+
 
 export default function Page2(){
+  const router = useRouter();
+
+  const handleOnClick=(chartType:String)=>{
+    router.push(`/${chartType}`);
+  }
+
   return (
     <div className="grid grid-cols-3 grid-rows-2 h-screen">
       <CardReveal>
@@ -15,7 +24,7 @@ export default function Page2(){
       </CardReveal>
 
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('barChart')}>
           <FeatureCard 
             Title="Bar Chart"
             Image={<Image src='/BarChart.jpeg' alt='Bar Chart Image' height={200} width={200}></Image>}>
@@ -24,7 +33,7 @@ export default function Page2(){
       </CardReveal>
 
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('scatterPlot')}>
           <FeatureCard 
             Title="Scatter Plot"
             Image={<Image src='/Scatterplot.jpeg' alt='Scatter Plot Image' height={200} width={200}></Image>}>
@@ -42,7 +51,7 @@ export default function Page2(){
       </CardReveal>
       
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('pieChart')}>
           <FeatureCard 
             Title="Pie Chart"
             Image={<Image src='/PieChart.jpeg' alt='Pie Chart Image' height={200} width={200}></Image>}>
@@ -51,10 +60,10 @@ export default function Page2(){
       </CardReveal>
 
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('donutChart')}>
           <FeatureCard 
-            Title="Dougnut Chart"
-            Image={<Image src='/DougnutChart.jpeg' alt='Dougnut Chart Image' height={200} width={200}></Image>}>
+            Title="Donut Chart"
+            Image={<Image src='/DonutChart.jpeg' alt='Donut Chart Image' height={200} width={200}></Image>}>
           </FeatureCard>
         </div>
       </CardReveal>

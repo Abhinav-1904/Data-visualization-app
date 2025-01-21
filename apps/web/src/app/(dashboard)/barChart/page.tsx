@@ -32,12 +32,13 @@ export default function Scatterplot(){
     };
 
     try{
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/visualize-scatterPlot`,formData,
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/visualize-barPlot`,formData,
                        {params:params});
       const imageData = response.data;
       if(imageData.image){
         setImageData(imageData.image);
       }
+
 
     }catch(error){
       console.log('Error fetching image: ',error);
@@ -48,17 +49,16 @@ export default function Scatterplot(){
     <div className="grid grid-cols-2">
       <div className="grid-cols-1 ml-4 mt-6"> 
         <div className="text-green-400 text-5xl font-bold">
-          Scatter Plot 
+          Bar Chart 
         </div>
         <div className="text-white text-lg mt-4">
           <div className="text-justify">
-            This scatterplot will help you visualize the relationship between two variables in your dataset. 
-            It plots each data point based on the values of the selected variables, allowing you to identify trends, 
-            correlations, and outliers.
+            A bar plot is an effective way to compare categorical data by representing values with rectangular bars. 
+            It is ideal for summarizing data distributions, showing counts, or visualizing comparisons among groups.
           </div>
           <div className="text-justify">
-            To generate the scatterplot, simply upload a dataset in CSV format. The file should contain at least 
-            two numerical columns that will be plotted on the X and Y axes.
+            To generate the bar Chart, simply upload a dataset in CSV format. The file should contain at least 
+            one categorical and one numerical columns that will be plotted on the X and Y axes.
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5 pt-4">
             <Label htmlFor="csv" className="text-green-400">Upload File</Label>
