@@ -15,7 +15,7 @@ export default function Page2(){
   return (
     <div className="grid grid-cols-3 grid-rows-2 h-screen">
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('lineChart')}>
           <FeatureCard 
             Title="Line Chart"
             Image={<Image src='/LineChart.jpeg' alt='Line Chart Image' height={200} width={200}></Image>}>
@@ -42,7 +42,7 @@ export default function Page2(){
       </CardReveal>
 
       <CardReveal>
-        <div className="ml-10 hover:cursor-pointer">
+        <div className="ml-10 hover:cursor-pointer" onClick={()=>handleOnClick('heatMap')}>
           <FeatureCard 
             Title="Heat Map"
             Image={<Image src='/Heatmap.png' alt='Heat Map' height={173} width={173}></Image>}>

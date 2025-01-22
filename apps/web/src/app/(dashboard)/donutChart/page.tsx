@@ -37,7 +37,12 @@ export default function Scatterplot(){
             <Label htmlFor="csv" className="text-green-400">Upload File</Label>
             <div className="w-56">
               <Input id="csv" type="file" accept=".csv" className="bg-white text-black hover:cursor-pointer"
-                    onChange={(e)=>handleFileUpload({e,setNumericColumns,setCategoricColumns,setFile})}/>
+                    onChange={(e)=>handleFileUpload({e,
+                    setNumericColumns,
+                    setCategoricColumns,
+                    setFile,
+                    setNumericSelectedColumns,
+                    setCategoricSelectedColumns})}/>
             </div>
             <Label className="text-green-400">Columns</Label>
             <div className="flex gap-3">
@@ -45,6 +50,8 @@ export default function Scatterplot(){
               <DropdownColumns columns={categoricColumns} onColChange={setCategoricSelectedColumns} d_type="Categorical"></DropdownColumns>
             </div>
             <Button onClick={()=>handleSubmission({
+              chartType:'donutChart',
+              paramsNames:['names','values'],
               file,
               numericColumns,
               numericSelectedColumns,

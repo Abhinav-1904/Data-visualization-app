@@ -1,7 +1,6 @@
 'use client'
 import { Button, Input } from "@repo/ui"
 import { Label } from "@repo/ui"
-import axios from "axios";
 import Image from "next/image";
 import { useState } from "react"
 import { DropdownColumns } from "../../../components/multi-col-select";
@@ -12,45 +11,46 @@ export default function Scatterplot(){
   const [file,setFile]=useState<File|null>(null);
   const [imageData, setImageData] = useState<string | null>(null);
   const [numericColumns, setNumericColumns] = useState<string[]>([])
-  const [categoricColumns, setCategoricColumns] = useState<string[]>([])
+  const [timeColumns, setTimeColumns] = useState<string[]>([])
   const [numericSelectedColumns, setNumericSelectedColumns] = useState<string[]>([])
-  const [categoricSelectedColumns, setCategoricSelectedColumns] = useState<string[]>([])
-  
+  const [timeSelectedColumns, setTimeSelectedColumns] = useState<string[]>([])
 
   return(
     <div className="grid grid-cols-2">
       <div className="grid-cols-1 ml-4 mt-6"> 
         <div className="text-green-400 text-5xl font-bold">
-          Pie Chart 
+          Line Chart 
         </div>
         <div className="text-white text-lg mt-4">
           <div className="text-justify">
-            This pie chart will help you visualize the proportions or percentages of categories within your dataset.
-            It displays data as slices of a circle, making it easy to identify the relative sizes of different segments.
+            A line chart is ideal for illustrating trends, patterns, and changes in data over time. It connects 
+            data points with straight lines, providing a clear visualization of how values increase, decrease, 
+            or remain consistent.
           </div>
           <div className="text-justify">
-            To generate the pie chart, simply upload a dataset in CSV format. The file should contain at least one
-            categorical column and a corresponding numerical column to represent the categories and their values.
+            To create a line chart, upload a dataset in CSV format containing a numerical column for values and 
+            another column for time or categories. This chart is effective for analyzing progress, comparisons, 
+            and variations within your dataset.
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5 pt-4">
             <Label htmlFor="csv" className="text-green-400">Upload File</Label>
             <div className="w-56">
               <Input id="csv" type="file" accept=".csv" className="bg-white text-black hover:cursor-pointer"
-                    onChange={(e)=>handleFileUpload({e,setNumericColumns,setCategoricColumns,setFile,setNumericSelectedColumns,
-                      setCategoricSelectedColumns})}/>
+                    onChange={(e)=>handleFileUpload({e,setNumericColumns,setCategoricColumns:setTimeColumns,setFile,time:true,setNumericSelectedColumns,
+                      setCategoricSelectedColumns:setTimeSelectedColumns})}/>
             </div>
             <Label className="text-green-400">Columns</Label>
             <div className="flex gap-3">
               <DropdownColumns columns={numericColumns} onColChange={setNumericSelectedColumns} d_type="Numerical"></DropdownColumns>
-              <DropdownColumns columns={categoricColumns} onColChange={setCategoricSelectedColumns} d_type="Categorical"></DropdownColumns>
+              <DropdownColumns columns={timeColumns} onColChange={setTimeSelectedColumns} d_type="Categorical"></DropdownColumns>
             </div>
             <Button onClick={()=>handleSubmission({
-              chartType:'pieChart',
-              paramsNames:['names','values'],
+              chartType:'lineChart',
+              paramsNames:['x','y'],
               file,
               numericColumns,
               numericSelectedColumns,
-              categoricSelectedColumns,
+              categoricSelectedColumns:timeSelectedColumns,
               setImageData
               })} className="w-fit bg-green-500 mt-2 hover:bg-green-600">
                 Generate

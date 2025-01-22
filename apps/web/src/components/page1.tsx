@@ -23,8 +23,9 @@ export default function Page1(){
         </Reveal>
         <Reveal>
           <div className="flex mb-4"> 
-            <Button className="bg-green-400 hover:bg-green-500" >Get Started</Button>
-            <Button className="bg-green-400 ml-6 hover:bg-green-500">Explore</Button>
+            <a href="#Section 2">
+            <Button className="bg-green-400 hover:bg-green-500 " >Get Started</Button>
+            </a>
           </div>
         </Reveal>
       </div>

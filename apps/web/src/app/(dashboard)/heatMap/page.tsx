@@ -8,6 +8,7 @@ import { DropdownColumns } from "../../../components/multi-col-select";
 import { handleFileUpload } from "../../../hooks/fileUpload";
 import { handleSubmission } from "../../../hooks/fileSubmission";
 
+
 export default function Scatterplot(){
   const [file,setFile]=useState<File|null>(null);
   const [imageData, setImageData] = useState<string | null>(null);
@@ -15,22 +16,22 @@ export default function Scatterplot(){
   const [categoricColumns, setCategoricColumns] = useState<string[]>([])
   const [numericSelectedColumns, setNumericSelectedColumns] = useState<string[]>([])
   const [categoricSelectedColumns, setCategoricSelectedColumns] = useState<string[]>([])
-  
 
+  
   return(
     <div className="grid grid-cols-2">
       <div className="grid-cols-1 ml-4 mt-6"> 
         <div className="text-green-400 text-5xl font-bold">
-          Pie Chart 
+          Heat Map 
         </div>
         <div className="text-white text-lg mt-4">
           <div className="text-justify">
-            This pie chart will help you visualize the proportions or percentages of categories within your dataset.
-            It displays data as slices of a circle, making it easy to identify the relative sizes of different segments.
+          A heatmap is a powerful tool for visualizing data density, relationships, and patterns through color variations. 
+          It uses a grid of colors to represent numerical values, making it easy to spot trends and anomalies in large datasets.
           </div>
           <div className="text-justify">
-            To generate the pie chart, simply upload a dataset in CSV format. The file should contain at least one
-            categorical column and a corresponding numerical column to represent the categories and their values.
+          To create a heatmap, upload a CSV dataset with two categorical columns for axes and a numerical column for values. 
+          This chart is excellent for identifying correlations, clustering, and areas of high or low activity in your data.
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5 pt-4">
             <Label htmlFor="csv" className="text-green-400">Upload File</Label>

@@ -104,6 +104,28 @@ async def getCols(file:UploadFile=File(...)):
         return {'error:'f'failed to respond{str(e)}'}
 
 
+@app.post("/get-columns_time_numeric")
+async def getCols(file:UploadFile=File(...)):
+
+    contents=await file.read()
+    try:
+        df=pd.read_csv(BytesIO(contents))
+        for col in df.columns:
+            try:
+                df[col] = pd.to_datetime(df[col], errors='coerce')
+            except Exception:
+                pass
+        
+        # Identify numeric and datetime columns
+        numeric_columns = df.select_dtypes(include=['number']).columns.to_list()
+        datetime_columns = [col for col in df.columns if pd.api.types.is_datetime64_any_dtype(df[col])]
+        relevant_columns = numeric_columns + datetime_columns
+        return {'columns': relevant_columns}
+
+    except Exception as e:
+        return {'error:'f'failed to respond{str(e)}'}
+
+
 @app.post("/visualize-pieChart")
 async def visualizeBar(names: List[str] = Query(...), values:List[str] = Query(...), file:UploadFile=File(...)):
 
@@ -119,6 +141,7 @@ async def visualizeBar(names: List[str] = Query(...), values:List[str] = Query(.
     
     if not all(col in df.columns for col in values):
         raise HTTPException(status_code=400, detail='columns do not match')
+        
     fig=px.pie(df, names=df[names[0]], values=df[values[0]], title='Pie Chart',template='ggplot2')
     img_bytes = BytesIO()
     fig.write_image(img_bytes, format="png")
@@ -141,6 +164,7 @@ async def visualizeBar(names: List[str] = Query(...), values:List[str] = Query(.
     
     if not all(col in df.columns for col in values):
         raise HTTPException(status_code=400, detail='columns do not match')
+
     fig = go.Figure(data=[go.Pie(labels=df[names[0]], values=df[values[0]], hole=.3)])
     fig.update_layout(
         title='Donut Chart',
@@ -151,7 +175,64 @@ async def visualizeBar(names: List[str] = Query(...), values:List[str] = Query(.
     encoded_img = base64.b64encode(img_bytes.read()).decode()
     return {"image": f"data:image/png;base64,{encoded_img}"}
 
+@app.post("/visualize-lineChart")
+async def visualizeBar(x: List[str] = Query(...), y:List[str] = Query(...), file:UploadFile=File(...)):
 
+    if not file.filename.endswith(".csv"):
+        raise HTTPException(status_code=400, detail='only csv files are allowed')
+    
+    contents=await file.read()
+
+    df=pd.read_csv(BytesIO(contents))
+
+    if not all(col in df.columns for col in x):
+        raise HTTPException(status_code=400, detail='columns do not match')
+    
+    if not all(col in df.columns for col in y):
+        raise HTTPException(status_code=400, detail='columns do not match')
+
+    fig = go.Figure()
+    for y_col in y:
+        fig.add_trace(go.Scatter(x=df[x[0]], y=df[y_col], mode='lines', name=y_col))
+        
+    fig.update_layout(
+        title='Line Chart',
+    )
+    img_bytes = BytesIO()
+    fig.write_image(img_bytes, format="png")
+    img_bytes.seek(0)
+    encoded_img = base64.b64encode(img_bytes.read()).decode()
+    return {"image": f"data:image/png;base64,{encoded_img}"}
+
+
+@app.post("/visualize-heatMap")
+async def visualizeBar(x: List[str] = Query(...), y:List[str] = Query(...), file:UploadFile=File(...)):
+
+    if not file.filename.endswith(".csv"):
+        raise HTTPException(status_code=400, detail='only csv files are allowed')
+    
+    contents=await file.read()
+
+    df=pd.read_csv(BytesIO(contents))
+
+    if not all(col in df.columns for col in x):
+        raise HTTPException(status_code=400, detail='columns do not match')
+    
+    if not all(col in df.columns for col in y):
+        raise HTTPException(status_code=400, detail='columns do not match')
+
+    fig = go.Figure()
+    for y_col in y:
+        fig.add_trace(go.Scatter(x=df[x[0]], y=df[y_col], mode='lines', name=y_col))
+        
+    fig.update_layout(
+        title='Line Chart',
+    )
+    img_bytes = BytesIO()
+    fig.write_image(img_bytes, format="png")
+    img_bytes.seek(0)
+    encoded_img = base64.b64encode(img_bytes.read()).decode()
+    return {"image": f"data:image/png;base64,{encoded_img}"}
 
 
 
