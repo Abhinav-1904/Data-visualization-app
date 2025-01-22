@@ -16,7 +16,7 @@ export default function Page1(){
           </div>
         </Reveal>
         <Reveal>
-          <div className="text-white mb-4" >
+          <div className="text-white mb-4">
             Turn complex data into meaningful visuals 📊 with our intuitive and powerful tools 🛠️. Designed for 
             professionals, students, and enthusiasts to uncover trends, patterns, and insights effortlessly ✨.
           </div>
@@ -24,7 +24,7 @@ export default function Page1(){
         <Reveal>
           <div className="flex mb-4"> 
             <a href="#Section 2">
-            <Button className="bg-green-400 hover:bg-green-500 " >Get Started</Button>
+              <Button className="bg-green-400 hover:bg-green-500">Get Started</Button>
             </a>
           </div>
         </Reveal>
