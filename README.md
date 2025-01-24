@@ -9,7 +9,6 @@ Graph Hive is an interactive data visualization dashboard designed to provide in
 - **Customizable Parameters**: Select columns and customize visualization options to suit your needs.
 - **Fast and Scalable Backend**: Powered by Python with Pydantic and Databases for rapid data processing.
 - **Modern Frontend**: Developed using Next.js, TypeScript, and Tailwind CSS for a seamless user experience.
-- **Cloud Integration**: Handle file uploads and processing efficiently with cloud storage support.
 
 ## Tech Stack
 
