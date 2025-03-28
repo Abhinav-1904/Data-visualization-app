@@ -23,13 +23,11 @@ Graph Hive is an interactive data visualization dashboard designed to provide in
 - Python
 - FastAPI
 - Pydantic
-- Databases (PostgreSQL)
 
 ### Other Tools
 
 - Turborepo for monorepo management
 - Plotly for data visualizations
-- Docker for containerization
 
 ## Installation and Setup
 
@@ -39,8 +37,6 @@ Ensure you have the following installed on your system:
 
 - Node.js
 - Python 3.10+
-- PostgreSQL
-- Docker (optional, for containerization)
 
 ### Steps
 
@@ -93,8 +89,7 @@ Ensure you have the following installed on your system:
 
 ## Usage
 
-1. Navigate to the homepage and upload a `.csv` file.
-2. Select the desired chart type.
+1. Select the desired chart type.
+2. Navigate to the page and upload a `.csv` file.
 3. Choose the appropriate columns for visualization (e.g., x-axis, y-axis).
 4. Generate and view your chart instantly.
-5. Download the visualization if required.
